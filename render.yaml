@@ -1,0 +1,10 @@
+services:
+  - type: static
+    name: nexora-dashboard
+    env: static
+    buildCommand: null
+    publishPath: ./
+    headers:
+      - path: /*
+        name: Cache-Control
+        value: no-cache
