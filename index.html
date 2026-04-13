@@ -100,78 +100,121 @@
                     
                     <!-- Top KPIs -->
                     <div class="kpi-container">
-                        <div class="kpi-card">
-                            <div class="kpi-value text-blue">9</div>
-                            <div class="kpi-label">TOTAL TABLES WITH ISSUES</div>
+                        <div class="kpi-card kpi-border-red">
+                            <div class="kpi-label">Pipeline failures</div>
+                            <div class="kpi-value">7</div>
+                            <div class="kpi-microtext trend-up">↑ 3 since yesterday</div>
                         </div>
-                        <div class="kpi-card">
-                            <div class="kpi-value text-red">0</div>
-                            <div class="kpi-label">DATA ISSUES</div>
+                        <div class="kpi-card kpi-border-yellow">
+                            <div class="kpi-label">Critical anomalies</div>
+                            <div class="kpi-value">4</div>
+                            <div class="kpi-microtext trend-up">↑ 1 unresolved > 24 hrs</div>
                         </div>
-                        <div class="kpi-card">
-                            <div class="kpi-value text-blue">0</div>
-                            <div class="kpi-label">SCHEMA ISSUES</div>
+                        <div class="kpi-card kpi-border-blue">
+                            <div class="kpi-label">Tables affected</div>
+                            <div class="kpi-value">11</div>
+                            <div class="kpi-microtext">across 3 domains</div>
                         </div>
-                        <div class="kpi-card">
-                            <div class="kpi-value text-green">0</div>
-                            <div class="kpi-label">TABLES ACCEPTED</div>
+                        <div class="kpi-card kpi-border-green">
+                            <div class="kpi-label">Reports impacted</div>
+                            <div class="kpi-value">6</div>
+                            <div class="kpi-microtext">across 3 domains</div>
                         </div>
                     </div>
 
-                    <!-- Daily Brief Section (from wireframe) -->
+                    <!-- Execution Summary -->
                     <div class="brief-section">
                         <div class="brief-title">
-                            <div class="brief-icon-wrap">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"></path>
-                                </svg>
-                            </div>
-                            <h2>Good morning, USER A. Here's your executive briefing for today.</h2>
+                            <h2>EXECUTION SUMMARY:</h2>
                         </div>
                         <ul class="brief-list">
-                            <li>Revenue is tracking 8% above Q1 forecast</li>
-                            <li>VYVGART market share increased to 34.2% in Neurology</li>
-                            <li>Board presentation materials are ready for review</li>
+                            <li>7 out of 9 pipeline runs failed, driven by 4 action required issues.</li>
+                            <li>11 tables across sales, patient enrollment, and customer domains are impacted.</li>
+                            <li>Issues primarily stem from schema changes and upstream CRM/data corrections affecting downstream reporting.</li>
                         </ul>
                     </div>
 
                     <!-- Category Tabs -->
                     <div class="tabs-container">
-                        <button class="tab active">All</button>
-                        <button class="tab">Schema</button>
-                        <button class="tab">Data</button>
-                        <button class="tab">DQM failures</button>
+                        <button class="tab active" data-filter="all">
+                            All <span class="tab-badge badge-all">5</span>
+                        </button>
+                        <button class="tab" data-filter="anomaly">
+                            Anomalies <span class="tab-badge badge-anomaly-count">2</span>
+                        </button>
+                        <button class="tab" data-filter="schema">
+                            Schema Drift <span class="tab-badge badge-schema-count">2</span>
+                        </button>
+                        <button class="tab" data-filter="dqm">
+                            DQM failures <span class="tab-badge badge-dqm-count">1</span>
+                        </button>
                     </div>
 
                     <!-- Alert Cards List -->
                     <div class="cards-list">
                         
-                        <!-- Card 1 -->
-                        <div class="alert-card">
+                        <!-- Card 1 (New: Schema) -->
+                        <div class="alert-card" data-category="schema">
                             <div class="card-accent border-red"></div>
                             <div class="card-inner">
                                 <div class="card-header">
                                     <div class="card-title-group">
-                                        <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                                        </svg>
-                                        <h3 class="card-title">Unusual Patient Enrollment Spike <span class="status-dot"></span></h3>
+                                        <div class="card-icon warning">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                                <polyline points="2 17 12 22 22 17"></polyline>
+                                                <polyline points="2 12 12 17 22 12"></polyline>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 class="card-title">Marketing Table Schema Change Detected</h3>
+                                            <div class="card-meta-time">12 minutes ago</div>
+                                        </div>
                                     </div>
-                                    <span class="badge badge-anomaly">Anomaly</span>
+                                    <div class="card-badges">
+                                        <span class="badge badge-schema">Schema Drift</span>
+                                        <span class="badge badge-critical">Critical</span>
+                                        <span class="badge badge-critical">Action required!</span>
+                                    </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="info-row">
-                                        <span class="info-label">What:</span>
-                                        <span class="info-value">Patient enrollment in Northeast jumped 340% above normal variance</span>
+                                    <div class="metadata-grid">
+                                        <div class="metadata-box">
+                                            <div class="meta-label">Affected Tables</div>
+                                            <div class="meta-value">bronze.marketing_spend → silver.marketing_attribution → gold.sales_performance</div>
+                                        </div>
+                                        <div class="metadata-box">
+                                            <div class="meta-label">Affected Pipelines</div>
+                                            <div class="meta-value">Ingestion Pipeline → Sales Transformation Pipeline → Attribution Pipeline</div>
+                                        </div>
                                     </div>
-                                    <div class="info-row">
-                                        <span class="info-label">Why:</span>
-                                        <span class="info-value">Data entry correction batch from partner site processed simultaneously</span>
+                                    
+                                    <div class="card-details-rows">
+                                        <div class="detail-row">
+                                            <div class="detail-label">WHAT</div>
+                                            <div class="detail-content">New column "tv_channel_campaign" added to marketing feed (TV Ad Campaign data)</div>
+                                        </div>
+                                        <div class="detail-row">
+                                            <div class="detail-label">WHY</div>
+                                            <div class="detail-content">Upstream media agency integrated new TV campaign data without aligning to approved schema evolution rules</div>
+                                        </div>
+                                        <div class="detail-row">
+                                            <div class="detail-label">ACTION</div>
+                                            <div class="detail-content">Validate new column mapping and update transformation logic before downstream aggregation</div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-actions">
+                                <div class="card-footer">
+                                    <div class="footer-left">
+                                        <div class="reports-label">Reports Affected:</div>
+                                        <div class="report-pills">
+                                            <span class="pill-link">Marketing Effectiveness Dashboard</span>
+                                            <span class="pill-link">Sales Attribution Report</span>
+                                            <span class="pill-link">Executive Campaign Performance</span>
+                                        </div>
+                                    </div>
                                     <button class="view-btn">
-                                        View 
+                                        View Schema Details
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <line x1="5" y1="12" x2="19" y2="12"></line>
                                             <polyline points="12 5 19 12 12 19"></polyline>
@@ -181,32 +224,68 @@
                             </div>
                         </div>
 
-                        <!-- Card 2 -->
-                        <div class="alert-card">
+                        <!-- Card 2 (New: Anomaly) -->
+                        <div class="alert-card" data-category="anomaly">
                             <div class="card-accent border-red"></div>
                             <div class="card-inner">
                                 <div class="card-header">
                                     <div class="card-title-group">
-                                        <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                                        </svg>
-                                        <h3 class="card-title">Unusual Patient Enrollment Spike <span class="status-dot"></span></h3>
+                                        <div class="card-icon warning">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 class="card-title">Unusual Sales Spike Detected</h3>
+                                            <div class="card-meta-time">8 minutes ago</div>
+                                        </div>
                                     </div>
-                                    <span class="badge badge-anomaly">Anomaly</span>
+                                    <div class="card-badges">
+                                        <span class="badge badge-anomaly">Anomaly</span>
+                                        <span class="badge badge-critical">Critical</span>
+                                        <span class="badge badge-critical">Action required!</span>
+                                    </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="info-row">
-                                        <span class="info-label">What:</span>
-                                        <span class="info-value">Unexpected dip in Q1 active patient profiles for newly launched therapeutic</span>
+                                    <div class="metadata-grid">
+                                        <div class="metadata-box">
+                                            <div class="meta-label">Affected Tables</div>
+                                            <div class="meta-value">sales_performance (Gold layer – Commercial Analytics)</div>
+                                        </div>
+                                        <div class="metadata-box">
+                                            <div class="meta-label">Affected Pipelines</div>
+                                            <div class="meta-value">Attribution Pipeline → Sales Aggregation Pipeline</div>
+                                        </div>
                                     </div>
-                                    <div class="info-row">
-                                        <span class="info-label">Why:</span>
-                                        <span class="info-value">Discrepancy in CRM integration syncing active accounts across legacy systems</span>
+                                    
+                                    <div class="card-details-rows">
+                                        <div class="detail-row">
+                                            <div class="detail-label">WHAT</div>
+                                            <div class="detail-content">Sales in Northeast region increased 28% vs expected baseline</div>
+                                        </div>
+                                        <div class="detail-row">
+                                            <div class="detail-label">WHY</div>
+                                            <div class="detail-content">Increase in sales attributed to new TV campaign data ("tv_channel_campaign") introduced through recent schema change</div>
+                                        </div>
+                                        <div class="detail-row">
+                                            <div class="detail-label">ACTION</div>
+                                            <div class="detail-content">Review the sudden spike in sales and assess the underlying causes</div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-actions">
+                                <div class="card-footer">
+                                    <div class="footer-left">
+                                        <div class="reports-label">Reports Affected:</div>
+                                        <div class="report-pills">
+                                            <span class="pill-link">Regional Sales Dashboard</span>
+                                            <span class="pill-link">Campaign ROI Report</span>
+                                            <span class="pill-link">Q1 Executive Summary</span>
+                                        </div>
+                                    </div>
                                     <button class="view-btn">
-                                        View 
+                                        View Anomaly Details
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <line x1="5" y1="12" x2="19" y2="12"></line>
                                             <polyline points="12 5 19 12 12 19"></polyline>
@@ -217,31 +296,67 @@
                         </div>
 
                         <!-- Card 3 -->
-                        <div class="alert-card">
+                        <div class="alert-card" data-category="anomaly">
                             <div class="card-accent border-red"></div>
                             <div class="card-inner">
                                 <div class="card-header">
                                     <div class="card-title-group">
-                                        <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                                        </svg>
-                                        <h3 class="card-title">Unusual Patient Enrollment Spike <span class="status-dot"></span></h3>
+                                        <div class="card-icon warning">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 class="card-title">Unusual patient enrollment spike</h3>
+                                            <div class="card-meta-time">Today, 08:14 AM</div>
+                                        </div>
                                     </div>
-                                    <span class="badge badge-anomaly">Anomaly</span>
+                                    <div class="card-badges">
+                                        <span class="badge badge-anomaly">Anomaly</span>
+                                        <span class="badge badge-critical">Critical</span>
+                                        <span class="badge badge-critical">Action required!</span>
+                                    </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="info-row">
-                                        <span class="info-label">What:</span>
-                                        <span class="info-value">Registration count in Western division exceeded expected threshold by 120%</span>
+                                    <div class="metadata-grid">
+                                        <div class="metadata-box">
+                                            <div class="meta-label">Affected Tables</div>
+                                            <div class="meta-value">fact_enrollment_northeast</div>
+                                        </div>
+                                        <div class="metadata-box">
+                                            <div class="meta-label">Affected Pipelines</div>
+                                            <div class="meta-value">CRM_Ingest_NE_Daily</div>
+                                        </div>
                                     </div>
-                                    <div class="info-row">
-                                        <span class="info-label">Why:</span>
-                                        <span class="info-value">New regional campaign activated driving sudden unprojected weekend traffic</span>
+                                    
+                                    <div class="card-details-rows">
+                                        <div class="detail-row">
+                                            <div class="detail-label">WHAT</div>
+                                            <div class="detail-content">Patient enrollment in Northeast region jumped 340% above normal variance threshold.</div>
+                                        </div>
+                                        <div class="detail-row">
+                                            <div class="detail-label">WHY</div>
+                                            <div class="detail-content">Data entry correction batch from partner site (Site ID: NE-2291) processed simultaneously with daily ingest, causing row duplication.</div>
+                                        </div>
+                                        <div class="detail-row">
+                                            <div class="detail-label">FIX</div>
+                                            <div class="detail-content">Review batch deduplication logic; add partner batch isolation window before merge.</div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-actions">
+                                <div class="card-footer">
+                                    <div class="footer-left">
+                                        <div class="reports-label">Reports Affected:</div>
+                                        <div class="report-pills">
+                                            <span class="pill-link">NE Enrollment Report</span>
+                                            <span class="pill-link">Q1 Exec Dashboard</span>
+                                            <span class="pill-link">Site Performance Dashboard</span>
+                                        </div>
+                                    </div>
                                     <button class="view-btn">
-                                        View 
+                                        View Anomaly Details
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <line x1="5" y1="12" x2="19" y2="12"></line>
                                             <polyline points="12 5 19 12 12 19"></polyline>
@@ -252,31 +367,135 @@
                         </div>
 
                         <!-- Card 4 -->
-                        <div class="alert-card">
+                        <div class="alert-card" data-category="dqm">
+                            <div class="card-accent border-yellow"></div>
+                            <div class="card-inner">
+                                <div class="card-header">
+                                    <div class="card-title-group">
+                                        <div class="card-icon warning-yellow">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <circle cx="12" cy="12" r="10"></circle>
+                                                <line x1="12" y1="8" x2="12" y2="12"></line>
+                                                <line x1="12" y1="16" x2="12.01" y2="16"></line>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 class="card-title">Data Quality Alert</h3>
+                                            <div class="card-meta-time">15 minutes ago</div>
+                                        </div>
+                                    </div>
+                                    <div class="card-badges">
+                                        <span class="badge badge-dq">DQM failures</span>
+                                        <span class="badge badge-medium">Medium</span>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+                                    <div class="metadata-grid">
+                                        <div class="metadata-box">
+                                            <div class="meta-label">Affected Tables</div>
+                                            <div class="meta-value">sales_data, customer_master (Gold layer)</div>
+                                        </div>
+                                        <div class="metadata-box">
+                                            <div class="meta-label">Affected Pipelines</div>
+                                            <div class="meta-value">None</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="card-details-rows">
+                                        <div class="detail-row">
+                                            <div class="detail-label">WHAT</div>
+                                            <div class="detail-content">5 non-critical data quality checks failed during ingestion</div>
+                                        </div>
+                                        <div class="detail-row">
+                                            <div class="detail-label">WHY</div>
+                                            <div class="detail-content">Null values in customer_id and inconsistencies in record counts post CRM sync</div>
+                                        </div>
+                                        <div class="detail-row">
+                                            <div class="detail-label">ACTION</div>
+                                            <div class="detail-content">Review DQM report and approve for downstream use if within acceptable threshold</div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer">
+                                    <div class="footer-left">
+                                        <div class="reports-label">Reports Affected:</div>
+                                        <div class="report-pills">
+                                            <span class="pill-link">Customer Segmentation Dashboard</span>
+                                            <span class="pill-link">HCP Targeting Model</span>
+                                        </div>
+                                    </div>
+                                    <button class="view-btn">
+                                        View DQM Failure Details
+                                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <line x1="5" y1="12" x2="19" y2="12"></line>
+                                            <polyline points="12 5 19 12 12 19"></polyline>
+                                        </svg>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Card 5 -->
+                        <div class="alert-card" data-category="schema">
                             <div class="card-accent border-red"></div>
                             <div class="card-inner">
                                 <div class="card-header">
                                     <div class="card-title-group">
-                                        <svg class="card-title-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
-                                        </svg>
-                                        <h3 class="card-title">Unusual Patient Enrollment Spike <span class="status-dot"></span></h3>
+                                        <div class="card-icon warning">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <polygon points="12 2 2 7 12 12 22 7 12 2"></polygon>
+                                                <polyline points="2 17 12 22 22 17"></polyline>
+                                                <polyline points="2 12 12 17 22 12"></polyline>
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <h3 class="card-title">Schema Change Detected</h3>
+                                            <div class="card-meta-time">20 minutes ago</div>
+                                        </div>
                                     </div>
-                                    <span class="badge badge-anomaly">Anomaly</span>
+                                    <div class="card-badges">
+                                        <span class="badge badge-schema">Schema Drift</span>
+                                        <span class="badge badge-critical">Critical</span>
+                                        <span class="badge badge-critical">Action required!</span>
+                                    </div>
                                 </div>
                                 <div class="card-body">
-                                    <div class="info-row">
-                                        <span class="info-label">What:</span>
-                                        <span class="info-value">Minor missing field anomaly detected in pipeline metadata ingestion</span>
+                                    <div class="metadata-grid">
+                                        <div class="metadata-box">
+                                            <div class="meta-label">Affected Tables</div>
+                                            <div class="meta-value">bronze.sales_data → silver.sales_clean</div>
+                                        </div>
+                                        <div class="metadata-box">
+                                            <div class="meta-label">Affected Pipelines</div>
+                                            <div class="meta-value">Attribution Pipeline → Sales Aggregation Pipeline</div>
+                                        </div>
                                     </div>
-                                    <div class="info-row">
-                                        <span class="info-label">Why:</span>
-                                        <span class="info-value">Downstream schema updates applied before clearing existing data pipeline cache</span>
+                                    
+                                    <div class="card-details-rows">
+                                        <div class="detail-row">
+                                            <div class="detail-label">WHAT</div>
+                                            <div class="detail-content">New column "discount_type" introduced in source sales feed</div>
+                                        </div>
+                                        <div class="detail-row">
+                                            <div class="detail-label">WHY</div>
+                                            <div class="detail-content">Upstream schema modification not aligned with defined evolution rules</div>
+                                        </div>
+                                        <div class="detail-row">
+                                            <div class="detail-label">ACTION</div>
+                                            <div class="detail-content">Review schema change and update transformation logic before next pipeline run</div>
+                                        </div>
                                     </div>
                                 </div>
-                                <div class="card-actions">
+                                <div class="card-footer">
+                                    <div class="footer-left">
+                                        <div class="reports-label">Reports Affected:</div>
+                                        <div class="report-pills">
+                                            <span class="pill-link">Sales Performance Dashboard</span>
+                                            <span class="pill-link">Revenue Analytics</span>
+                                        </div>
+                                    </div>
                                     <button class="view-btn">
-                                        View 
+                                        View Schema Details
                                         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                                             <line x1="5" y1="12" x2="19" y2="12"></line>
                                             <polyline points="12 5 19 12 12 19"></polyline>

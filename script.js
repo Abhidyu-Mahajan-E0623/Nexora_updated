@@ -55,14 +55,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     closeBtn.addEventListener('click', () => {
         if (!expandedCard) return;
+        closeExpanded();
+    });
 
-        // Note: For closing, we could do full reverse FLIP, 
-        // but simply fading elements back in is often smooth enough 
-        // and CSS transitions handle the height expansions beautifully.
-        
-        // Remove state
+    function closeExpanded() {
         document.body.classList.remove('view-mode-active');
         expandedCard.classList.remove('expanded');
         expandedCard = null;
+    }
+
+    // --- Filter Logic ---
+    const tabs = document.querySelectorAll('.tab');
+    const cards = document.querySelectorAll('.alert-card');
+
+    tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Close any expanded card first
+            if (expandedCard) closeExpanded();
+
+            // Update active tab
+            tabs.forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+
+            const filter = tab.getAttribute('data-filter');
+
+            cards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                
+                if (filter === 'all' || category === filter) {
+                    card.style.display = 'flex';
+                    // Optional: add a small fade-in animation
+                    card.style.opacity = '0';
+                    requestAnimationFrame(() => {
+                        card.style.transition = 'opacity 0.3s ease';
+                        card.style.opacity = '1';
+                    });
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
     });
 });
