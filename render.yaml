@@ -3,7 +3,7 @@ services:
     name: nexora-dashboard
     runtime: static
     buildCommand: null
-    publishPath: ./
+    staticPublishPath: ./
     headers:
       - path: /*
         name: Cache-Control
