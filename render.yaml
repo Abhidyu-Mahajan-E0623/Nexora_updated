@@ -1,7 +1,7 @@
 services:
-  - type: static
+  - type: web
     name: nexora-dashboard
-    env: static
+    runtime: static
     buildCommand: null
     publishPath: ./
     headers:
