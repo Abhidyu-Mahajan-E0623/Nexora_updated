@@ -263,15 +263,15 @@
                                     <div class="card-details-rows">
                                         <div class="detail-row">
                                             <div class="detail-label">WHAT</div>
-                                            <div class="detail-content">Sales in Northeast region increased 28% vs expected baseline</div>
+                                            <div class="detail-content">Revenue in Northeast region reached $1.1M, exceeding expected baseline range of $0.6M–$0.7M (threshold: ±15%)</div>
                                         </div>
                                         <div class="detail-row">
                                             <div class="detail-label">WHY</div>
-                                            <div class="detail-content">Increase in sales attributed to new TV campaign data ("tv_channel_campaign") introduced through recent schema change</div>
+                                            <div class="detail-content">Unvetted schema change introduced a new promotional channel, impacting sales attribution logic</div>
                                         </div>
                                         <div class="detail-row">
                                             <div class="detail-label">ACTION</div>
-                                            <div class="detail-content">Review the sudden spike in sales and assess the underlying causes</div>
+                                            <div class="detail-content">Evaluate the sudden rise in revenue and validate whether the increase aligns with actual business activity</div>
                                         </div>
                                     </div>
                                 </div>
@@ -509,18 +509,181 @@
 
                     <!-- Detail Panel (Starts Hidden) -->
                     <div id="alert-detail-panel" class="detail-panel">
-                        <div class="panel-header">
-                            <h3 class="panel-title">Detailed Analysis Space</h3>
-                            <button id="close-detail-btn" class="close-btn">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                    <line x1="18" y1="6" x2="6" y2="18"></line>
-                                    <line x1="6" y1="6" x2="18" y2="18"></line>
-                                </svg>
-                            </button>
-                        </div>
-                        <div class="panel-body">
-                            <!-- Placeholder content -->
-                            <p class="panel-placeholder">Expanded details and interactions can be built here.</p>
+                        <div class="panel-body p-0 custom-scrollbar-panel">
+                            <div class="anomaly-detail-container">
+                                
+                                <!-- Header area -->
+                                <div class="anomaly-detail-header">
+                                    <div class="anomaly-breadcrumbs">
+                                        <span class="text-blue">Alerts</span> &rsaquo; Anomaly detail
+                                        <button id="close-detail-btn" class="close-btn-inline" title="Close details">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                    
+                                    <div class="anomaly-banner">
+                                        <div class="banner-icon-bg">
+                                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;">
+                                                <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path>
+                                                <line x1="12" y1="9" x2="12" y2="13"></line>
+                                                <line x1="12" y1="17" x2="12.01" y2="17"></line>
+                                            </svg>
+                                        </div>
+                                        <div class="banner-text-content">
+                                            <h4>Unusual Sales Spike Detected</h4>
+                                            <p>Detected Apr 11, 2026 &middot; 14:32 UTC &middot; ID: ANO-2024-0041 &middot; Awaiting Review</p>
+                                        </div>
+                                    </div>
+
+                                    <div class="anomaly-badges">
+                                        <span class="badge-pill pill-critical">Critical</span>
+                                        <span class="badge-pill pill-schema">Schema Change</span>
+                                        <span class="badge-pill pill-gold">Gold Layer</span>
+                                        <span class="badge-pill pill-commercial">Commercial Analytics</span>
+                                        <span class="badge-pill pill-pending">Pending Review</span>
+                                    </div>
+                                </div>
+
+                                <div class="detail-grid">
+                                    <!-- What Happened -->
+                                    <div class="detail-section-card">
+                                        <div class="section-header-title">WHAT HAPPENED</div>
+                                        <table class="kv-table">
+                                            <tr><td class="td-key">Anomaly Type</td><td class="td-val">Spike in Sales Data</td></tr>
+                                            <tr><td class="td-key">Metric Affected</td><td class="td-val">Revenue (Sales)</td></tr>
+                                            <tr><td class="td-key">Observed Value</td><td class="td-val text-red">$1.1M</td></tr>
+                                            <tr><td class="td-key">Expected Baseline</td><td class="td-val">$0.6M &ndash; $0.7M</td></tr>
+                                            <tr><td class="td-key">Detection Threshold</td><td class="td-val">&plusmn;15%</td></tr>
+                                        </table>
+                                    </div>
+
+                                    <!-- Root Cause -->
+                                    <div class="detail-section-card">
+                                        <div class="section-header-title">ROOT CAUSE</div>
+                                        <table class="kv-table root-cause-tb">
+                                            <tr><td class="td-key" style="width:35%">Cause Type</td><td class="td-val">Unvetted Schema Change</td></tr>
+                                            <tr><td class="td-key" style="border-bottom:none;">Introduced By</td><td class="td-val" style="border-bottom:none;">New Promotional Channel</td></tr>
+                                            <tr>
+                                                <td colspan="2" style="border-top: 1px solid #f1f5f9; padding-top: 12px; margin-top: 4px;">
+                                                    <div class="td-reason-key">Reason</div>
+                                                    <div class="td-reason-val">The primary driver of the uplift in sales value is the introduction of the "Samples" channel, leading to a deviation beyond the defined &plusmn;15% threshold, supported by additional changes in market conditions.</div>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </div>
+
+                                    <!-- Event Timeline -->
+                                    <div class="detail-section-card">
+                                        <div class="section-header-title">EVENT TIMELINE</div>
+                                        <div class="timeline">
+                                            <div class="timeline-item">
+                                                <div class="timeline-dot dot-red"></div>
+                                                <div class="tl-time">Apr 11 &middot; 14:32 UTC</div>
+                                                <div class="tl-title">Anomaly flagged &mdash; sales exceeded expected baseline</div>
+                                                <span class="tl-badge red">Auto-detected</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <div class="timeline-dot dot-yellow"></div>
+                                                <div class="tl-time">Apr 11 &middot; 14:28 UTC</div>
+                                                <div class="tl-title">External promotion file ingested</div>
+                                                <span class="tl-badge green" style="background:#f0fdfa; color:#0f766e; border:1px solid #ccfbf1;">Ingestion</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <div class="timeline-dot dot-yellow"></div>
+                                                <div class="tl-time">Apr 11 &middot; 11:05 UTC</div>
+                                                <div class="tl-title">New column ingested in raw marketing table via Ingestion Pipeline &rarr; Attribution Pipeline</div>
+                                                <span class="tl-badge orange">Schema Change</span>
+                                            </div>
+                                            <div class="timeline-item">
+                                                <div class="timeline-dot dot-green"></div>
+                                                <div class="tl-time">Apr 10 &middot; 08:00 UTC</div>
+                                                <div class="tl-title">Last clean pipeline run &mdash; all checks passed</div>
+                                                <span class="tl-badge green-light" style="background:#f0fdf4; color:#166534; border:1px solid #bbf7d0;">Clean Run</span>
+                                            </div>
+                                            <div class="timeline-scroll-indicator">
+                                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                                                    <polyline points="19 12 12 19 5 12"></polyline>
+                                                </svg>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Impact Assessment -->
+                                    <div class="detail-section-card flex-col-justify-between">
+                                        <div>
+                                            <div class="section-header-title">IMPACT ASSESSMENT</div>
+                                            <div class="impact-list">
+                                                <div class="impact-item">
+                                                    <div>
+                                                        <div class="impact-title">Regional Sales Dashboard</div>
+                                                        <div class="impact-sub">BI team &middot; refreshes daily</div>
+                                                    </div>
+                                                    <div class="impact-severity high">High</div>
+                                                </div>
+                                                <div class="impact-item">
+                                                    <div>
+                                                        <div class="impact-title">Campaign ROI Report</div>
+                                                        <div class="impact-sub">Marketing &middot; weekly</div>
+                                                    </div>
+                                                    <div class="impact-severity high">High</div>
+                                                </div>
+                                                <div class="impact-item">
+                                                    <div>
+                                                        <div class="impact-title">Q1 Executive Summary</div>
+                                                        <div class="impact-sub">Leadership &middot; quarterly</div>
+                                                    </div>
+                                                    <div class="impact-severity medium">Medium</div>
+                                                </div>
+                                                <div class="impact-item">
+                                                    <div>
+                                                        <div class="impact-title">Downstream Pipelines (3 jobs)</div>
+                                                        <div class="impact-sub">Dependent jobs</div>
+                                                    </div>
+                                                    <div class="impact-severity medium">Medium</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="impact-links">
+                                            <a href="#"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg> View Dashboard &nearr;</a>
+                                            <a href="#"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg> View Pipeline &nearr;</a>
+                                            <a href="#"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg> SQL Editor &rarr;</a>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- Full Width row (Stacked) -->
+                                    <div class="detail-grid full-span" style="grid-column: 1 / -1; display:flex; flex-direction:column; gap:24px;">
+                                        
+                                        <div class="detail-section-card reviewer-notes-box" style="border:1px solid #e2e8f0; border-radius:12px; padding:24px; background:#ffffff;">
+                                            <div class="section-header-title" style="border-bottom:none; margin-bottom:12px; padding-bottom:0; color:#475569;">REVIEWER NOTES</div>
+                                            <textarea class="reviewer-textarea" style="background:#f8fafc; border:1px solid #e2e8f0; border-radius:8px; padding:16px; margin-top:4px;" placeholder="Add a note before accepting or rejecting..."></textarea>
+                                        </div>
+
+                                        <div class="detail-section-card pb-0 decision-box" style="border:1px solid #e2e8f0; border-radius:12px; padding:24px; background:#ffffff; flex:1; display:flex; flex-direction:column;">
+                                            <div class="dec-title">Decision required</div>
+                                            <div class="dec-desc">
+                                                <strong>Accepting</strong><br>
+                                                &rarr; Anomaly is considered valid; pipeline resumes as-is<br><br>
+                                                <strong>Rejecting</strong><br>
+                                                &rarr; Data issue confirmed; manual correction required before pipeline continuation<br><br>
+                                                <strong>Escalating</strong><br>
+                                                &rarr; Notification sent to vendor and operations team for further investigation
+                                            </div>
+                                            <div class="dec-actions" style="margin-top:auto;">
+                                                <button class="btn btn-escalate">Escalate &nearr;</button>
+                                                <button class="btn btn-reject">Reject change</button>
+                                                <button class="btn btn-accept">Accept change</button>
+                                            </div>
+                                            <div class="dec-warning text-yellow-900 bg-yellow-50" style="background:#fefce8; color:#713f12; padding:12px 16px; border-radius:8px; margin-top:16px; font-weight:500; font-size:13px; border:1px solid #fef08a;">
+                                                Accepting will resume pipeline execution without rollback. Verify the anomaly before proceeding.
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

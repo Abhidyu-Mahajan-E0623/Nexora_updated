@@ -10,6 +10,12 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = e.target.closest('.alert-card');
             if (!card) return;
 
+            // Only show detailed analysis for anomaly category
+            if (card.getAttribute('data-category') !== 'anomaly') {
+                alert('Detailed analysis view is currently only available for Anomaly events.');
+                return;
+            }
+
             // PREPARE: Get initial positions of the card being expanded
             const firstRect = card.getBoundingClientRect();
 
