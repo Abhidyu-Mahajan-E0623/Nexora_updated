@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const viewButtons = document.querySelectorAll('.view-btn');
     const closeBtn = document.getElementById('close-detail-btn');
+    const closeSchemaBtn = document.getElementById('close-schema-detail-btn');
     const pageContainer = document.querySelector('.page-container');
 
     let expandedCard = null;
@@ -10,10 +11,19 @@ document.addEventListener('DOMContentLoaded', () => {
             const card = e.target.closest('.alert-card');
             if (!card) return;
 
-            // Only show detailed analysis for anomaly category
-            if (card.getAttribute('data-category') !== 'anomaly') {
-                alert('Detailed analysis view is currently only available for Anomaly events.');
+            const category = card.getAttribute('data-category');
+            // Only show detailed analysis for anomaly and schema categories
+            if (category !== 'anomaly' && category !== 'schema') {
+                alert('Detailed analysis view is currently only available for Anomaly and Schema events.');
                 return;
+            }
+
+            // Set active panel based on category
+            document.querySelectorAll('.detail-panel').forEach(p => p.classList.remove('active-panel'));
+            if (category === 'anomaly') {
+                document.getElementById('alert-detail-panel').classList.add('active-panel');
+            } else if (category === 'schema') {
+                document.getElementById('schema-detail-panel').classList.add('active-panel');
             }
 
             // PREPARE: Get initial positions of the card being expanded
@@ -63,6 +73,13 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!expandedCard) return;
         closeExpanded();
     });
+
+    if (closeSchemaBtn) {
+        closeSchemaBtn.addEventListener('click', () => {
+            if (!expandedCard) return;
+            closeExpanded();
+        });
+    }
 
     function closeExpanded() {
         document.body.classList.remove('view-mode-active');
