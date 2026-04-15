@@ -4,6 +4,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const closeSchemaBtn = document.getElementById('close-schema-detail-btn');
     const pageContainer = document.querySelector('.page-container');
     const alertNavLink = document.querySelector('[data-nav="alerts"]');
+    const insightsNavLink = document.querySelector('[data-nav="insights"]');
+    const alertsView = document.getElementById('alerts-view');
+    const insightsView = document.getElementById('insights-view');
+    const headerTitle = document.querySelector('.header-left h1');
+    const headerIcon = document.querySelector('.header-left svg');
     const tabs = document.querySelectorAll('.tab');
     const cards = document.querySelectorAll('.alert-card');
     const modalTriggers = document.querySelectorAll('[data-modal-target]');
@@ -177,10 +182,44 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    function showAlertsView() {
+        insightsView.style.display = 'none';
+        alertsView.style.display = 'block';
+        insightsNavLink.classList.remove('active');
+        alertNavLink.classList.add('active');
+        headerTitle.textContent = 'Alerts & Monitoring';
+        headerIcon.innerHTML = `
+            <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+            <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        `;
+        resetAlertsView();
+    }
+
+    function showInsightsView() {
+        alertsView.style.display = 'none';
+        insightsView.style.display = 'block';
+        alertNavLink.classList.remove('active');
+        insightsNavLink.classList.add('active');
+        headerTitle.textContent = 'Insights';
+        headerIcon.innerHTML = `
+            <line x1="18" y1="20" x2="18" y2="10"></line>
+            <line x1="12" y1="20" x2="12" y2="4"></line>
+            <line x1="6" y1="20" x2="6" y2="14"></line>
+        `;
+        pageContainer?.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
     if (alertNavLink) {
         alertNavLink.addEventListener('click', (e) => {
             e.preventDefault();
-            closeExpanded(resetAlertsView);
+            closeExpanded(showAlertsView);
+        });
+    }
+
+    if (insightsNavLink) {
+        insightsNavLink.addEventListener('click', (e) => {
+            e.preventDefault();
+            closeExpanded(showInsightsView);
         });
     }
 

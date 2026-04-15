@@ -1672,6 +1672,8 @@ body.view-mode-active .detail-panel.active-panel {
     justify-content: center;
     padding: 24px;
     z-index: 3000;
+    overflow-y: auto;
+    overscroll-behavior: contain;
 }
 
 .modal-overlay.is-open {
@@ -1685,6 +1687,9 @@ body.view-mode-active .detail-panel.active-panel {
     border-radius: 20px;
     box-shadow: 0 28px 70px rgba(15, 23, 42, 0.2);
     overflow: hidden;
+    max-height: calc(100dvh - 48px);
+    display: flex;
+    flex-direction: column;
 }
 
 .modal-card-compact {
@@ -1746,6 +1751,8 @@ body.view-mode-active .detail-panel.active-panel {
     display: flex;
     flex-direction: column;
     gap: 18px;
+    overflow-y: auto;
+    min-height: 0;
 }
 
 .info-list {
@@ -1921,6 +1928,11 @@ body.modal-open {
 @media (max-width: 720px) {
     .modal-overlay {
         padding: 16px;
+        align-items: flex-start;
+    }
+
+    .modal-card {
+        max-height: calc(100dvh - 32px);
     }
 
     .modal-header,
