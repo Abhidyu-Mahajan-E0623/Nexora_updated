@@ -236,6 +236,42 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
+    // Accept & Run API Trigger
+    const acceptButtons = document.querySelectorAll('.accept-action');
+    console.log('Accept buttons found:', acceptButtons.length);
+    
+    acceptButtons.forEach(btn => {
+        btn.addEventListener('click', async () => {
+            console.log('Accept & Run clicked. Target:', btn.getAttribute('data-modal-target'));
+            
+            const payload = {
+                "wait_for_completion": true,
+                "poll_interval_seconds": 15,
+                "max_wait_seconds": 7200
+            };
+
+            try {
+                const response = await fetch('https://hwtkv02r-8000.inc1.devtunnels.ms/api/v1/repairs/repair-latest-parent-run', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                
+                if (response.ok) {
+                    console.log('Repair API Success:', response.status);
+                } else {
+                    console.error('Repair API Failed with status:', response.status);
+                    const errorDetails = await response.json().catch(() => ({}));
+                    console.error('Validation Errors:', errorDetails);
+                }
+            } catch (error) {
+                console.error('Repair API error:', error);
+            }
+        });
+    });
+
     modals.forEach(modal => {
         modal.addEventListener('click', (e) => {
             if (e.target === modal) {

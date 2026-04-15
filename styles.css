@@ -289,7 +289,7 @@ body {
     max-height: 0;
     opacity: 0;
     overflow: hidden;
-    font-size: 12px;
+    font-size: 14px;
     color: #64748b;
     line-height: 1.5;
     transition: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
@@ -1978,3 +1978,115 @@ body.modal-open {
     padding-bottom: 40px;
     overflow: visible !important;
 }
+
+/* ===== INSIGHTS VIEW ===== */
+
+.insights-section-header {
+    margin-top: 32px;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.insights-section-header.first {
+    margin-top: 10px;
+}
+
+.insights-indicator {
+    width: 4px;
+    height: 20px;
+    background-color: #7c3aed; /* Brand Purple */
+    border-radius: 2px;
+}
+
+.insights-section-header h2 {
+    color: #0f172a;
+    font-size: 18px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+/* Standardized Insight Card refinements */
+.alert-card.insight-card {
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+}
+
+.insight-card .card-inner {
+    padding: 24px 32px;
+    gap: 12px;
+}
+
+.insight-card .card-title {
+    font-size: 20px;
+    margin: 4px 0 8px 0;
+}
+
+.insight-subtag {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #475569;
+}
+
+.insight-subtag svg {
+    color: #7c3aed;
+}
+
+.insight-description {
+    font-size: 18px;
+    color: #475569;
+    line-height: 1.6;
+    margin-bottom: 20px;
+}
+
+.insight-footer {
+    border-top: 1px solid #f1f5f9;
+    padding-top: 16px;
+    margin-top: 8px;
+}
+
+.insight-action {
+    color: #7c3aed;
+    font-weight: 700;
+    font-size: 14px;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    width: fit-content;
+    transition: all 0.2s ease;
+}
+
+.insight-action:hover {
+    color: #6d28d9;
+    transform: translateX(4px);
+}
+
+/* Badge variants for insights */
+.badge-insight-tag {
+    background-color: #334155;
+    color: #ffffff;
+}
+
+/* Remove KPI sparklines and standardize padding */
+.insights-view-content .kpi-container {
+    gap: 16px;
+}
+
+.insights-view-content .kpi-card {
+    padding: 24px;
+    min-height: auto;
+    border-radius: 12px;
+}
+
+.insights-view-content .kpi-value {
+    font-size: 38px;
+}
+
