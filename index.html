@@ -437,7 +437,7 @@
                                         <div class="action-card-text">
                                             <p>Re-trigger the pipeline in Databricks and register the change in the schema contract.</p>
                                         </div>
-                                        <button class="btn-card-action accept-action" data-modal-target="accept-modal">Accept & Run &rarr;</button>
+                                        <button class="btn-card-action accept-action" data-modal-target="accept-modal">Accept &amp; Run &rarr;</button>
                                     </div>
 
                                     <!-- Reject Card -->
@@ -454,7 +454,7 @@
                                         <div class="action-card-text">
                                             <p>Halt the pipeline, roll back to last clean state, and notify the data engineering team.</p>
                                         </div>
-                                        <button class="btn-card-action reject-action" data-modal-target="reject-modal">Reject & Stop &rarr;</button>
+                                        <button class="btn-card-action reject-action" data-modal-target="reject-modal">Reject &amp; Stop &rarr;</button>
                                     </div>
                                 </div>
 
@@ -680,9 +680,9 @@
                                             <h4>Accept & Run</h4>
                                         </div>
                                         <div class="action-card-text">
-                                            <p>Re-trigger the pipeline in Databricks and register the change in the schema contract.</p>
+                                            <p>Approve the schema change, register it, and re-trigger the pipeline in Databricks.</p>
                                         </div>
-                                        <button class="btn-card-action accept-action" data-modal-target="accept-modal">Accept & Run &rarr;</button>
+                                        <button class="btn-card-action accept-action" data-modal-target="schema-accept-modal">Accept &amp; Run &rarr;</button>
                                     </div>
 
                                     <!-- Reject Card -->
@@ -697,9 +697,9 @@
                                             <h4>Reject & Stop</h4>
                                         </div>
                                         <div class="action-card-text">
-                                            <p>Halt the pipeline, roll back to last clean state, and notify the data engineering team.</p>
+                                            <p>Stop the pipeline, revert to the last clean state, and notify the data engineering team to review the change.</p>
                                         </div>
-                                        <button class="btn-card-action reject-action" data-modal-target="reject-modal">Reject & Stop &rarr;</button>
+                                        <button class="btn-card-action reject-action" data-modal-target="schema-reject-modal">Reject &amp; Stop &rarr;</button>
                                     </div>
                                 </div>
 
@@ -949,6 +949,95 @@
                         <div class="form-block">
                             <div class="form-label">Message</div>
                             <div class="form-field textarea-field">Hi team,<br><br>The silver_to_gold_patient_enrollment pipeline has been halted after the unusual enrollment spike alert. The patient_enrollment (Gold) table has been reverted to its last clean state, and all dependent pipelines are paused pending investigation.<br><br>Please review the issue and coordinate the next remediation steps.</div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="modal-secondary-btn" type="button" data-close-modal>Cancel</button>
+                        <button class="modal-primary-btn" type="button" data-close-modal>Send email &rarr;</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="schema-accept-modal" class="modal-overlay" aria-hidden="true">
+                <div class="modal-card modal-card-compact" role="dialog" aria-modal="true" aria-labelledby="schema-accept-modal-title">
+                    <div class="modal-header">
+                        <div>
+                            <h3 id="schema-accept-modal-title">Schema change accepted &amp; pipeline re-triggered</h3>
+                            <p>The schema change has been approved and the pipeline is now running. Monitor progress via the link below.</p>
+                        </div>
+                        <button class="modal-close-btn" type="button" data-close-modal aria-label="Close popup">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="info-list">
+                            <div class="info-row">
+                                <span class="info-label">Pipeline</span>
+                                <span class="info-value">bronze_to_silver_promo_activity</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Run ID</span>
+                                <span class="info-value">run_20260413_0914</span>
+                            </div>
+                            <div class="info-row">
+                                <span class="info-label">Status</span>
+                                <span class="status-pill running">Running</span>
+                            </div>
+                        </div>
+                        <div class="form-label" style="margin-top: 20px;">Link</div>
+                        <a class="monitor-link" href="https://example.com/databricks/pipelines/bronze_to_silver_promo_activity/runs/run_20260413_0914" target="_blank" rel="noreferrer">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M10 13a5 5 0 0 0 7.54.54l2-2a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                                <path d="M14 11a5 5 0 0 0-7.54-.54l-2 2a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                            </svg>
+                            <span>Monitor on Databricks</span>
+                        </a>
+                        <div class="form-block">
+                            <div class="form-label">Note</div>
+                            <div class="form-field">Schema has been updated and registered. Downstream tables and reports will refresh after pipeline completion.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="schema-reject-modal" class="modal-overlay" aria-hidden="true">
+                <div class="modal-card" role="dialog" aria-modal="true" aria-labelledby="schema-reject-modal-title">
+                    <div class="modal-header">
+                        <div>
+                            <h3 id="schema-reject-modal-title">Notify data engineering team</h3>
+                            <p>Pipeline has been halted. Send an escalation email to notify the responsible team and log the schema issue.</p>
+                        </div>
+                        <button class="modal-close-btn" type="button" data-close-modal aria-label="Close popup">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="alert-message-box">
+                            <div class="alert-message-label">Alert Message</div>
+                            <p>Pipeline bronze_to_silver_promo_activity has been stopped. Table promo_activity (Bronze layer) is reverted to its last approved schema. All dependent pipelines are paused pending resolution.</p>
+                        </div>
+
+                        <div class="form-label" style="margin: 20px 0 8px;">Email Fields</div>
+
+                        <div class="form-block">
+                            <div class="form-label">To</div>
+                            <div class="form-field">data-eng@acme-pharma.com, data-ops@acme-pharma.com</div>
+                        </div>
+
+                        <div class="form-block">
+                            <div class="form-label">Subject</div>
+                            <div class="form-field">[ACTION REQUIRED] Pipeline halted &mdash; Unapproved schema change in promo_activity</div>
+                        </div>
+
+                        <div class="form-block">
+                            <div class="form-label">Message</div>
+                            <div class="form-field textarea-field">Hi team,<br><br>The bronze_to_silver_promo_activity pipeline has been rejected and halted due to an unapproved schema change detected in the promo_activity (Bronze layer) table.<br><br>Change: A new column TOTAL_SAMPLES was introduced without prior schema approval or data owner confirmation.<br><br>Please review the change and confirm before re-triggering. All downstream pipelines and reports have been paused.<br><br>Detected: Apr 13, 2026 &middot; 09:14 UTC | Run ID: run_20260413_0914</div>
                         </div>
                     </div>
                     <div class="modal-footer">
